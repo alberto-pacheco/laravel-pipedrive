@@ -1,4 +1,8 @@
-<?php namespace LasseRafn\Pipedrive\Utils;
+<?php 
+
+namespace LasseRafn\Pipedrive\Utils;
+
+use Illuminate\Support\Str;
 
 class Model
 {
@@ -27,10 +31,10 @@ class Model
 		$this->request = $request;
 
 		foreach ( $data as $key => $value ) {
-			if ( ! method_exists( $this, 'set' . ucfirst( camel_case( $key ) ) . 'Attribute' ) ) {
+			if ( ! method_exists( $this, 'set' . ucfirst( Str::camel( $key ) ) . 'Attribute' ) ) {
 				$this->setAttribute( $key, $value );
 			} else {
-				$this->setAttribute( $key, $this->{'set' . ucfirst( camel_case( $key ) ) . 'Attribute'}( $value ) );
+				$this->setAttribute( $key, $this->{'set' . ucfirst( Str::camel( $key ) ) . 'Attribute'}( $value ) );
 			}
 		}
 	}
